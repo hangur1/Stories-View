@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stories — Work Overview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --cream: #F5F2EC; --cream-dark: #EDE9E0; --white: #FFFFFF;
+  --navy: #111827; --navy-mid: #1F2937;
+  --text: #111827; --text-2: #6B7280; --text-3: #9CA3AF;
+  --border: #E5E1D8; --border-mid: #D1CCBF;
+  --sage: #2D6A50; --sage-bg: #EAF2EE;
+  --gold: #8B6914; --gold-bg: #FBF4E0;
+  --slate: #3B5A8A; --slate-bg: #EBF0F8;
+  --plum: #6B3F87; --plum-bg: #F3EDF8;
+  --rust: #A0391A; --rust-bg: #FAF0EC;
+  --font-serif: 'Lora', Georgia, serif;
+  --font-sans: 'IBM Plex Sans', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+  --r: 8px; --rsm: 4px;
+}
+html { font-size: 14px; }
+body { font-family: var(--font-sans); background: var(--cream); color: var(--text); min-height: 100vh; -webkit-font-smoothing: antialiased; }
+.layout { display: flex; min-height: 100vh; }
+
+/* SIDEBAR */
+.sidebar { width: 216px; flex-shrink: 0; background: var(--navy); display: flex; flex-direction: column; padding: 26px 0 22px; position: sticky; top: 0; height: 100vh; overflow-y: auto; }
+.sb-logo { padding: 0 20px 24px; border-bottom: 1px solid rgba(255,255,255,0.07); margin-bottom: 18px; }
+.sb-mark { display: flex; align-items: center; gap: 10px; }
+.sb-icon { width: 30px; height: 30px; background: rgba(255,255,255,0.1); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-family: var(--font-serif); font-style: italic; font-size: 16px; color: rgba(255,255,255,0.85); }
+.sb-name { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.9); }
+.sb-team { font-family: var(--font-mono); font-size: 9px; color: rgba(255,255,255,0.3); margin-top: 1px; letter-spacing: 0.05em; }
+.nav-grp-label { font-family: var(--font-mono); font-size: 9px; text-transform: uppercase; letter-spacing: 0.12em; color: rgba(255,255,255,0.22); padding: 12px 20px 5px; }
+.nav-item { display: flex; align-items: center; gap: 9px; padding: 7px 20px; font-size: 12.5px; color: rgba(255,255,255,0.5); text-decoration: none; transition: all 0.12s; }
+.nav-item:hover { color: rgba(255,255,255,0.88); background: rgba(255,255,255,0.05); }
+.nav-item.active { color: rgba(255,255,255,0.92); background: rgba(255,255,255,0.08); }
+.nav-dot { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; }
+.sb-footer { margin-top: auto; padding: 18px 20px 0; border-top: 1px solid rgba(255,255,255,0.07); }
+.sb-ts { font-family: var(--font-mono); font-size: 9px; color: rgba(255,255,255,0.22); line-height: 1.6; }
+.refresh-btn { margin-top: 9px; width: 100%; font-family: var(--font-mono); font-size: 9px; text-transform: uppercase; letter-spacing: 0.08em; background: rgba(255,255,255,0.07); color: rgba(255,255,255,0.55); border: 1px solid rgba(255,255,255,0.1); border-radius: var(--rsm); padding: 7px 10px; cursor: pointer; transition: all 0.12s; }
+.refresh-btn:hover { background: rgba(255,255,255,0.13); color: rgba(255,255,255,0.9); }
+.refresh-btn:disabled { opacity: 0.3; cursor: default; }
+
+/* CONTENT */
+.content { flex: 1; min-width: 0; padding: 36px 40px 60px; }
+.page-hd { margin-bottom: 30px; }
+.page-title { font-family: var(--font-serif); font-size: 25px; font-weight: 400; letter-spacing: -0.02em; line-height: 1.2; }
+.page-sub { font-size: 12.5px; color: var(--text-2); margin-top: 5px; }
+.sec-title { font-family: var(--font-mono); font-size: 9px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-3); margin-bottom: 11px; margin-top: 34px; display: flex; align-items: center; gap: 10px; }
+.sec-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+/* METRICS */
+.metrics-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(145px, 1fr)); gap: 9px; }
+.metric-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--r); padding: 17px 18px 14px; transition: border-color 0.15s; }
+.metric-card:hover { border-color: var(--border-mid); }
+.metric-lbl { font-family: var(--font-mono); font-size: 9px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-3); margin-bottom: 7px; }
+.metric-val { font-family: var(--font-serif); font-size: 30px; font-weight: 400; line-height: 1; letter-spacing: -0.02em; }
+.metric-sub { font-size: 11px; color: var(--text-2); margin-top: 5px; }
+.metric-hi { color: var(--sage); }
+
+/* PIPELINE */
+.pipeline-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(88px, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: var(--r); overflow: hidden; }
+.stage-cell { background: var(--white); padding: 15px 13px 11px; transition: background 0.12s; }
+.stage-cell:hover { background: var(--cream); }
+.stage-nm { font-family: var(--font-mono); font-size: 8.5px; text-transform: uppercase; letter-spacing: 0.07em; color: var(--text-3); margin-bottom: 5px; line-height: 1.4; }
+.stage-n { font-family: var(--font-serif); font-size: 22px; font-weight: 400; line-height: 1; }
+.stage-bar { height: 2px; background: var(--border); border-radius: 1px; margin-top: 9px; overflow: hidden; }
+.stage-fill { height: 100%; border-radius: 1px; }
+
+/* TABLES */
+.tw { background: var(--white); border: 1px solid var(--border); border-radius: var(--r); overflow: hidden; }
+.tw table { width: 100%; border-collapse: collapse; }
+.tw th { font-family: var(--font-mono); font-size: 9px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-3); font-weight: 400; padding: 9px 16px; text-align: left; background: var(--cream); border-bottom: 1px solid var(--border); }
+.tw td { padding: 9px 16px; font-size: 12.5px; border-bottom: 1px solid var(--border); vertical-align: middle; }
+.tw tr:last-child td { border-bottom: none; }
+.tw tr:hover td { background: var(--cream); }
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+@media (max-width: 900px) { .two-col { grid-template-columns: 1fr; } }
+.mini-bar { height: 2px; background: var(--border); border-radius: 1px; overflow: hidden; }
+.mini-fill { height: 100%; border-radius: 1px; background: var(--navy-mid); }
+
+/* PILLS */
+.pill { display: inline-block; font-family: var(--font-mono); font-size: 9px; text-transform: uppercase; letter-spacing: 0.05em; padding: 2px 6px; border-radius: 3px; white-space: nowrap; font-weight: 500; }
+.p-sage  { background: var(--sage-bg);    color: var(--sage); }
+.p-gold  { background: var(--gold-bg);    color: var(--gold); }
+.p-slate { background: var(--slate-bg);   color: var(--slate); }
+.p-plum  { background: var(--plum-bg);    color: var(--plum); }
+.p-rust  { background: var(--rust-bg);    color: var(--rust); }
+.p-gray  { background: var(--cream-dark); color: var(--text-2); }
+
+/* CUSTOMER STORIES */
+.cs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(155px, 1fr)); gap: 9px; }
+.cs-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--r); padding: 17px 17px 13px; }
+.cs-stage { font-family: var(--font-mono); font-size: 9px; text-transform: uppercase; letter-spacing: 0.09em; color: var(--text-3); margin-bottom: 7px; }
+.cs-n { font-family: var(--font-serif); font-size: 34px; font-weight: 400; line-height: 1; letter-spacing: -0.02em; }
+.cs-types { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 9px; }
+
+/* DUE */
+.d-over { font-family: var(--font-mono); font-size: 10.5px; color: var(--rust); }
+.d-soon { font-family: var(--font-mono); font-size: 10.5px; color: var(--gold); }
+.d-ok   { font-family: var(--font-mono); font-size: 10.5px; color: var(--text-3); }
+.task-lnk { color: var(--text); text-decoration: none; }
+.task-lnk:hover { text-decoration: underline; }
+
+.proj-links { display: flex; flex-wrap: wrap; gap: 7px; }
+.proj-lnk { font-family: var(--font-mono); font-size: 9px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-2); text-decoration: none; padding: 6px 11px; border: 1px solid var(--border); border-radius: var(--rsm); background: var(--white); transition: all 0.12s; }
+.proj-lnk:hover { border-color: var(--navy); color: var(--navy); }
+
+/* LOADING / ERROR */
+.loading-state { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 55vh; gap: 13px; }
+.spinner { width: 18px; height: 18px; border: 1.5px solid var(--border); border-top-color: var(--navy); border-radius: 50%; animation: spin 0.7s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.loading-msg { font-family: var(--font-mono); font-size: 9px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-3); }
+.err-box { background: var(--rust-bg); border: 1px solid #F0D0C4; border-radius: var(--r); padding: 20px 22px; font-size: 12.5px; color: var(--rust); line-height: 1.8; }
+.err-box code { font-family: var(--font-mono); font-size: 10.5px; background: rgba(0,0,0,0.05); padding: 1px 5px; border-radius: 3px; }
+
+@media (max-width: 780px) { .sidebar { display: none; } .content { padding: 22px 18px 48px; } }
+</style>
+</head>
+<body>
+<div class="layout">
+
+<nav class="sidebar">
+  <div class="sb-logo">
+    <div class="sb-mark">
+      <div class="sb-icon">S</div>
+      <div>
+        <div class="sb-name">Stories</div>
+        <div class="sb-team">mercury.com</div>
+      </div>
+    </div>
+  </div>
+  <div class="nav-grp">
+    <div class="nav-grp-label">Editorial</div>
+    <a class="nav-item active" href="#top"><div class="nav-dot" style="background:#6366F1"></div>Pipeline</a>
+    <a class="nav-item" href="#workload"><div class="nav-dot" style="background:#10B981"></div>Workload</a>
+    <a class="nav-item" href="#deadlines"><div class="nav-dot" style="background:#F59E0B"></div>Deadlines</a>
+  </div>
+  <div class="nav-grp">
+    <div class="nav-grp-label">Customer Stories</div>
+    <a class="nav-item" href="#cs"><div class="nav-dot" style="background:#EC4899"></div>Pipeline</a>
+  </div>
+  <div class="nav-grp">
+    <div class="nav-grp-label">Projects</div>
+    <a class="nav-item" href="https://app.asana.com/1/1198745115141077/project/1205198592737566" target="_blank"><div class="nav-dot" style="background:rgba(255,255,255,0.18)"></div>Stories Board ↗</a>
+    <a class="nav-item" href="https://app.asana.com/1/1198745115141077/project/1205338505241797" target="_blank"><div class="nav-dot" style="background:rgba(255,255,255,0.18)"></div>CS Tracker ↗</a>
+    <a class="nav-item" href="https://app.asana.com/1/1198745115141077/project/1209016454640490" target="_blank"><div class="nav-dot" style="background:rgba(255,255,255,0.18)"></div>Other Projects ↗</a>
+    <a class="nav-item" href="https://app.asana.com/1/1198745115141077/project/1213105311030827" target="_blank"><div class="nav-dot" style="background:rgba(255,255,255,0.18)"></div>Artwork Board ↗</a>
+  </div>
+  <div class="sb-footer">
+    <div class="sb-ts" id="sb-ts">Not yet loaded</div>
+    <button class="refresh-btn" id="refresh-btn" onclick="loadAll()">↺ Refresh data</button>
+  </div>
+</nav>
+
+<main class="content" id="main">
+  <div class="loading-state">
+    <div class="spinner"></div>
+    <div class="loading-msg">Connecting to Asana…</div>
+  </div>
+</main>
+</div>
+
+<script>
+// All Asana calls go through /api/asana — no CORS, no token in browser
+const SEC = {
+  intake:     '1205198592737600',
+  confirmed:  '1211272941504497',
+  briefing:   '1211272941504498',
+  drafting:   '1211272941504487',
+  filming:    '1212639331444444',
+  revision:   '1208342418664239',
+  thumbnails: '1212639331444481',
+  teeingUp:   '1208342418664240',
+  live:       '1205198592737568',
+};
+const PROJ = {
+  tracker: '1205338505241797',
+  other:   '1209016454640490',
+  artwork: '1213105311030827',
+};
+const TODAY = new Date('2026-05-03T00:00:00');
+const FIELDS = 'name,completed,assignee.name,due_on,permalink_url,custom_fields.name,custom_fields.enum_value.name';
+
+async function api(asanaPath, params = {}) {
+  const qs = new URLSearchParams({ path: asanaPath, ...params });
+  const r = await fetch(`/api/asana?${qs}`);
+  if (!r.ok) {
+    const err = await r.json().catch(() => ({}));
+    throw new Error(err.error || `API error ${r.status}`);
+  }
+  return r.json();
+}
+
+const secTasks  = g => api(`sections/${g}/tasks`,  { opt_fields: FIELDS, limit: 100, completed_since: 'now' }).then(r => r.data || []);
+const projTasks = g => api(`projects/${g}/tasks`,   { opt_fields: FIELDS, limit: 100, completed_since: 'now' }).then(r => r.data || []);
+
+const cf   = (t, n) => (t.custom_fields || []).find(f => f.name === n)?.enum_value?.name || null;
+const days = d => d ? Math.round((new Date(d + 'T00:00:00') - TODAY) / 86400000) : null;
+
+function chPill(ch) {
+  const m = { 'Blog ': 'p-slate', 'Blog': 'p-slate', 'YouTube': 'p-rust', 'Meridian': 'p-plum', 'Print': 'p-gold', 'Other': 'p-gray' };
+  const k = (ch || 'Other').trim();
+  return `<span class="pill ${m[k] || 'p-gray'}">${k}</span>`;
+}
+
+async function loadAll() {
+  const btn = document.getElementById('refresh-btn');
+  btn.disabled = true; btn.textContent = '⟳ Loading…';
+  document.getElementById('main').innerHTML = `<div class="loading-state"><div class="spinner"></div><div class="loading-msg">Pulling live data…</div></div>`;
+  try {
+    const [intake, confirmed, briefing, drafting, filming, revision, thumbnails, teeingUp, live, tracker, other, artwork] = await Promise.all([
+      secTasks(SEC.intake), secTasks(SEC.confirmed), secTasks(SEC.briefing), secTasks(SEC.drafting),
+      secTasks(SEC.filming), secTasks(SEC.revision), secTasks(SEC.thumbnails), secTasks(SEC.teeingUp), secTasks(SEC.live),
+      projTasks(PROJ.tracker), projTasks(PROJ.other), projTasks(PROJ.artwork),
+    ]);
+    render({ intake, confirmed, briefing, drafting, filming, revision, thumbnails, teeingUp, live, tracker, other, artwork });
+    document.getElementById('sb-ts').textContent = 'Updated ' + new Date().toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+  } catch (err) {
+    document.getElementById('main').innerHTML = `
+      <div class="page-hd"><div class="page-title">Stories — Work overview</div></div>
+      <div class="err-box">
+        <strong>Could not load data</strong><br><br>
+        ${err.message.includes('ASANA_TOKEN')
+          ? `Add your Asana token in Vercel:<br>
+             1. Go to your project in <strong>vercel.com</strong><br>
+             2. Settings → Environment Variables<br>
+             3. Add <code>ASANA_TOKEN</code> = your token<br>
+             4. Redeploy`
+          : err.message
+        }
+      </div>`;
+  }
+  btn.disabled = false; btn.textContent = '↺ Refresh data';
+}
+
+function render(d) {
+  const active = [...d.intake, ...d.confirmed, ...d.briefing, ...d.drafting, ...d.filming, ...d.revision, ...d.thumbnails, ...d.teeingUp];
+
+  const pipeline = [
+    { label: 'Intake',      tasks: d.intake,     color: '#9CA3AF' },
+    { label: 'Confirmed',   tasks: d.confirmed,  color: '#6366F1' },
+    { label: 'Briefing',    tasks: d.briefing,   color: '#8B5CF6' },
+    { label: 'Drafting',    tasks: d.drafting,   color: '#A855F7' },
+    { label: 'Filming',     tasks: d.filming,    color: '#F59E0B' },
+    { label: 'In revision', tasks: d.revision,   color: '#EF4444' },
+    { label: 'Thumbnails',  tasks: d.thumbnails, color: '#10B981' },
+    { label: 'Teeing up',   tasks: d.teeingUp,   color: '#059669' },
+    { label: 'Live',        tasks: d.live,       color: '#065F46' },
+  ];
+  const maxS = Math.max(...pipeline.map(p => p.tasks.length), 1);
+
+  const am = {};
+  active.forEach(t => {
+    const n = t.assignee?.name || 'Unassigned';
+    if (!am[n]) am[n] = { count: 0, channels: {} };
+    am[n].count++;
+    const ch = (cf(t, 'Channel') || 'Other').trim();
+    am[n].channels[ch] = (am[n].channels[ch] || 0) + 1;
+  });
+  const assignees = Object.entries(am).sort((a, b) => b[1].count - a[1].count);
+
+  const upcoming = active.filter(t => t.due_on)
+    .map(t => ({ ...t, d: days(t.due_on) }))
+    .filter(t => t.d !== null && t.d <= 14)
+    .sort((a, b) => a.d - b.d).slice(0, 10);
+
+  const CS_STAGES = ['Potential Lead', 'Vetted Lead', 'Drafting', 'Completed'];
+  const csm = {}; CS_STAGES.forEach(s => csm[s] = { count: 0, types: {} });
+  d.tracker.forEach(t => {
+    const s = cf(t, 'Customer Story Stage') || 'Potential Lead';
+    if (csm[s]) {
+      csm[s].count++;
+      const ty = cf(t, 'Customer Advocacy Type') || cf(t, 'Potential Customer Story Type');
+      if (ty) csm[s].types[ty] = (csm[s].types[ty] || 0) + 1;
+    }
+  });
+  const csColors = { 'Potential Lead': '#9CA3AF', 'Vetted Lead': '#6366F1', 'Drafting': '#A855F7', 'Completed': '#059669' };
+
+  const fm = {};
+  [...d.drafting, ...d.confirmed, ...d.briefing].forEach(t => { const f = cf(t, 'Format') || 'Unspecified'; fm[f] = (fm[f] || 0) + 1; });
+  const formats = Object.entries(fm).sort((a, b) => b[1] - a[1]).slice(0, 7);
+  const fTotal = formats.reduce((s, [, n]) => s + n, 0);
+
+  const chm = {};
+  active.forEach(t => { const c = (cf(t, 'Channel') || 'Other').trim(); chm[c] = (chm[c] || 0) + 1; });
+  const channels = Object.entries(chm).sort((a, b) => b[1] - a[1]);
+
+  const dueLabel = n => n < 0 ? `${Math.abs(n)}d over` : n === 0 ? 'today' : n === 1 ? 'tmrw' : `${n}d`;
+  const dueClass = n => n < 0 ? 'd-over' : n <= 3 ? 'd-soon' : 'd-ok';
+
+  document.getElementById('main').innerHTML = `
+<div id="top">
+<div class="page-hd">
+  <div class="page-title">Stories — Work overview</div>
+  <div class="page-sub">${active.length} active pieces in pipeline &middot; ${d.tracker.length} customer candidates &middot; ${d.other.length + d.artwork.length} other open tasks</div>
+</div>
+
+<div class="sec-title">At a glance</div>
+<div class="metrics-row">
+  <div class="metric-card"><div class="metric-lbl">Active in pipeline</div><div class="metric-val">${active.length}</div><div class="metric-sub">Stories Board</div></div>
+  <div class="metric-card"><div class="metric-lbl">In drafting</div><div class="metric-val">${d.drafting.length}</div><div class="metric-sub">${d.drafting.filter(t => t.due_on && days(t.due_on) <= 7).length > 0 ? `<span class="metric-hi">${d.drafting.filter(t => t.due_on && days(t.due_on) <= 7).length} due this week</span>` : 'no deadlines this week'}</div></div>
+  <div class="metric-card"><div class="metric-lbl">Teeing up</div><div class="metric-val">${d.teeingUp.length}</div><div class="metric-sub">ready to publish</div></div>
+  <div class="metric-card"><div class="metric-lbl">In revision</div><div class="metric-val">${d.revision.length}</div><div class="metric-sub">${d.thumbnails.length} in thumbnails</div></div>
+  <div class="metric-card"><div class="metric-lbl">Customer candidates</div><div class="metric-val">${d.tracker.length}</div><div class="metric-sub">${csm['Vetted Lead']?.count || 0} vetted leads</div></div>
+  <div class="metric-card"><div class="metric-lbl">Other + artwork</div><div class="metric-val">${d.other.length + d.artwork.length}</div><div class="metric-sub">open tasks</div></div>
+</div>
+
+<div class="sec-title">Editorial pipeline</div>
+<div class="pipeline-row">
+  ${pipeline.map(p => `<div class="stage-cell"><div class="stage-nm">${p.label}</div><div class="stage-n">${p.tasks.length}</div><div class="stage-bar"><div class="stage-fill" style="width:${Math.round(p.tasks.length/maxS*100)}%;background:${p.color}"></div></div></div>`).join('')}
+</div>
+
+<div class="sec-title" id="workload">Workload &amp; deadlines</div>
+<div class="two-col">
+  <div class="tw">
+    <table>
+      <thead><tr><th>Team member</th><th>Tasks</th><th>Top channel</th><th style="width:65px"></th></tr></thead>
+      <tbody>
+        ${assignees.filter(([n]) => n !== 'Unassigned').map(([name, info]) => {
+          const topCh = Object.entries(info.channels).sort((a,b)=>b[1]-a[1])[0]?.[0] || '—';
+          const pct = Math.round(info.count / (active.length || 1) * 100);
+          return `<tr><td style="font-weight:500">${name}</td><td>${info.count}</td><td>${chPill(topCh)}</td><td><div class="mini-bar"><div class="mini-fill" style="width:${pct}%"></div></div></td></tr>`;
+        }).join('')}
+        ${am['Unassigned'] ? `<tr><td style="color:var(--text-3)">Unassigned</td><td style="color:var(--text-3)">${am['Unassigned'].count}</td><td></td><td><div class="mini-bar"><div class="mini-fill" style="width:${Math.round(am['Unassigned'].count/(active.length||1)*100)}%;background:var(--border-mid)"></div></div></td></tr>` : ''}
+      </tbody>
+    </table>
+  </div>
+  <div class="tw" id="deadlines">
+    <table>
+      <thead><tr><th>Task</th><th>Owner</th><th>Due</th></tr></thead>
+      <tbody>
+        ${upcoming.length === 0
+          ? `<tr><td colspan="3" style="text-align:center;color:var(--text-3);padding:22px">No deadlines in the next 14 days</td></tr>`
+          : upcoming.map(t => `<tr><td><a href="${t.permalink_url}" target="_blank" class="task-lnk">${t.name.length > 42 ? t.name.slice(0,42)+'…' : t.name}</a></td><td style="color:var(--text-2);white-space:nowrap">${t.assignee?.name?.split(' ')[0] || '—'}</td><td><span class="${dueClass(t.d)}">${dueLabel(t.d)}</span></td></tr>`).join('')
+        }
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="sec-title">Format &amp; channel mix</div>
+<div class="two-col">
+  <div class="tw">
+    <table>
+      <thead><tr><th>Format</th><th>Count</th><th style="width:65px"></th></tr></thead>
+      <tbody>${formats.map(([fmt, n]) => `<tr><td>${fmt}</td><td>${n}</td><td><div class="mini-bar"><div class="mini-fill" style="width:${Math.round(n/(fTotal||1)*100)}%"></div></div></td></tr>`).join('')}</tbody>
+    </table>
+  </div>
+  <div class="tw">
+    <table>
+      <thead><tr><th>Channel</th><th>Active</th><th style="width:65px"></th></tr></thead>
+      <tbody>${channels.map(([ch, n]) => `<tr><td>${chPill(ch)}</td><td>${n}</td><td><div class="mini-bar"><div class="mini-fill" style="width:${Math.round(n/(active.length||1)*100)}%"></div></div></td></tr>`).join('')}</tbody>
+    </table>
+  </div>
+</div>
+
+<div class="sec-title" id="cs">Customer stories pipeline</div>
+<div class="cs-grid">
+  ${CS_STAGES.map(stage => {
+    const info = csm[stage] || { count: 0, types: {} };
+    const topTypes = Object.entries(info.types).sort((a,b)=>b[1]-a[1]).slice(0,3);
+    return `<div class="cs-card"><div class="cs-stage">${stage}</div><div class="cs-n" style="color:${csColors[stage]||'var(--text)'}">${info.count}</div>${topTypes.length ? `<div class="cs-types">${topTypes.map(([t]) => `<span class="pill p-gray">${t.length>22?t.slice(0,22)+'…':t}</span>`).join('')}</div>` : ''}</div>`;
+  }).join('')}
+</div>
+
+<div class="sec-title" style="margin-top:34px">Projects</div>
+<div class="proj-links">
+  <a href="https://app.asana.com/1/1198745115141077/project/1205198592737566" target="_blank" class="proj-lnk">Stories Board ↗</a>
+  <a href="https://app.asana.com/1/1198745115141077/project/1205338505241797" target="_blank" class="proj-lnk">CS Tracker ↗</a>
+  <a href="https://app.asana.com/1/1198745115141077/project/1209016454640490" target="_blank" class="proj-lnk">Other Projects ↗</a>
+  <a href="https://app.asana.com/1/1198745115141077/project/1213105311030827" target="_blank" class="proj-lnk">Artwork Board ↗</a>
+  <a href="https://app.asana.com/0/portfolio/1213076612585761/1213104989203818" target="_blank" class="proj-lnk">Portfolio ↗</a>
+</div>
+</div>`;
+}
+
+loadAll();
+</script>
+</body>
+</html>
